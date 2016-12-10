@@ -4,6 +4,8 @@
     "description": "Advanced version of warsawjs workshop application",
     "main": "main.js",
     "scripts": {
+        "build": "webpack --watch",
+        "clear": "rm -rf dist/",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 module.exports = {
     entry: __dirname + '/src/main.js',
     
@@ -26,5 +28,16 @@ module.exports = {
                 loader: 'raw-loader'
             }
         ]
-    }
+    },
+    
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false,
+            },
+            output: {
+                comments: false,
+            },
+        }),
+    ]    
 };
