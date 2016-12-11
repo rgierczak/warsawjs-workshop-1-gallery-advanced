@@ -41,7 +41,13 @@ class Gallery {
         }
     }
     
-    setCurrentPhotoId(value) {
+    setCurrentPhotoId(event) {
+        let dataSet = event.target.dataset;
+        let eventValue = dataSet.id || dataSet.direction;
+        this.handleEventValue(eventValue);
+    }
+    
+    handleEventValue(value) {
         switch (value) {
             case 'next':
                 if (this.currentPhotoId < this.images.length - 1) {
@@ -56,33 +62,26 @@ class Gallery {
                 break;
             
             default:
-                this.currentPhotoId = value;
+                this.currentPhotoId = Number(value);
         }
     }
     
     setupClickListeners() {
         let $nextButton = document.getElementById("next-button");
         let $previousButton = document.getElementById("previous-button");
-        
-        $nextButton.addEventListener("click", () => {
-            this.clickHandler("next");
-        });
-        
-        $previousButton.addEventListener("click", () => {
-            this.clickHandler("previous");
-        });
+        this.addClickedListener($nextButton);
+        this.addClickedListener($previousButton);
         this.addPhotosListener();
+    }
+    
+    addClickedListener($nextButton) {
+        $nextButton.addEventListener("click", (event) => this.clickHandler(event));
     }
     
     addPhotosListener() {
         let $galleryPhotosHTMLCollection = getGalleryPhotos();
-        let photos = Array.from($galleryPhotosHTMLCollection);
-        
-        photos.forEach((photo) => {
-            photo.addEventListener("click", (event) => {
-                this.clickHandler(Number(event.target.id));
-            });
-        });
+        let $photos = Array.from($galleryPhotosHTMLCollection);
+        $photos.forEach(($photo) => this.addClickedListener($photo));
     }
     
     clickHandler(value) {
@@ -99,14 +98,11 @@ class Gallery {
     setActivePhotoBorder() {
         let $galleryPhotosHTMLCollection = getGalleryPhotos();
         let photos = Array.from($galleryPhotosHTMLCollection);
-        
-        photos.forEach((photo) => {
-            this.updatePhotoClassName(photo);
-        });
+        photos.forEach((photo) => this.updatePhotoClassName(photo));
     }
     
     updatePhotoClassName($photo) {
-        if (isPhotoCurrent($photo.id, this.currentPhotoId)) {
+        if (isPhotoCurrent($photo.dataset.id, this.currentPhotoId)) {
             $photo.className = 'border-active';
         } else {
             $photo.className = '';
