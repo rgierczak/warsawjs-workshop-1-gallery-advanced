@@ -43,18 +43,24 @@ class Gallery {
         this.handleEventValue(eventValue);
     }
     
+    incrementCurrentPhotoId() {
+        if (this.currentPhotoId < this.images.length - 1)
+            this.currentPhotoId += 1;
+    }
+    
+    decrementCurrentPhotoId() {
+        if (this.currentPhotoId > 0)
+            this.currentPhotoId -= 1;
+    }
+    
     handleEventValue(value) {
         switch (value) {
             case 'next':
-                if (this.currentPhotoId < this.images.length - 1) {
-                    this.currentPhotoId += 1;
-                }
+                this.incrementCurrentPhotoId();
                 break;
             
             case 'previous':
-                if (this.currentPhotoId > 0) {
-                    this.currentPhotoId -= 1;
-                }
+                this.decrementCurrentPhotoId();
                 break;
             
             default:
