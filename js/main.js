@@ -1,11 +1,5 @@
-function getGalleryPhotos() {
-    let $thumbsGallery = document.getElementById("thumbs-gallery");
+function getGalleryPhotos($thumbsGallery) {
     return $thumbsGallery.getElementsByTagName("img");
-}
-
-function setCurrentPhotoSrc(arrayPhoto) {
-    let $currentPhoto = document.getElementById("current-photo");
-    $currentPhoto.src = arrayPhoto.src;
 }
 
 function findPhotoByCurrentId(images, id) {
@@ -26,10 +20,26 @@ class Gallery {
     constructor() {
         this.images = [];
         this.currentPhotoId = 0;
-        
+        this.$thumbsGallery = null;
+        this.$currentPhoto = null;
+        this.$nextButton = null;
+        this.$previousButton = null;
+    
+        this.setup();
+    }
+    
+    setup() {
+        this.setupDOMElements();
         this.buildImagesArray();
-        this.displayCurrentPhoto();
         this.setupClickListeners();
+        this.displayCurrentPhoto();
+    }
+    
+    setupDOMElements() {
+        this.$thumbsGallery = document.getElementById("thumbs-gallery");
+        this.$currentPhoto = document.getElementById("current-photo");
+        this.$nextButton = document.getElementById("next-button");
+        this.$previousButton = document.getElementById("previous-button");
     }
     
     buildImagesArray() {
@@ -67,10 +77,8 @@ class Gallery {
     }
     
     setupClickListeners() {
-        let $nextButton = document.getElementById("next-button");
-        let $previousButton = document.getElementById("previous-button");
-        this.addClickedListener($nextButton);
-        this.addClickedListener($previousButton);
+        this.addClickedListener(this.$nextButton);
+        this.addClickedListener(this.$previousButton);
         this.addPhotosListener();
     }
     
@@ -79,7 +87,7 @@ class Gallery {
     }
     
     addPhotosListener() {
-        let $galleryPhotosHTMLCollection = getGalleryPhotos();
+        let $galleryPhotosHTMLCollection = getGalleryPhotos(this.$thumbsGallery);
         let $photos = Array.from($galleryPhotosHTMLCollection);
         $photos.forEach(($photo) => this.addClickedListener($photo));
     }
@@ -92,11 +100,11 @@ class Gallery {
     
     displayCurrentPhoto() {
         let currentArrayPhoto = findPhotoByCurrentId(this.images, this.currentPhotoId);
-        setCurrentPhotoSrc(currentArrayPhoto);
+        this.$currentPhoto.src = currentArrayPhoto.src
     }
     
     setActivePhotoBorder() {
-        let $galleryPhotosHTMLCollection = getGalleryPhotos();
+        let $galleryPhotosHTMLCollection = getGalleryPhotos(this.$thumbsGallery);
         let photos = Array.from($galleryPhotosHTMLCollection);
         photos.forEach((photo) => this.updatePhotoClassName(photo));
     }
