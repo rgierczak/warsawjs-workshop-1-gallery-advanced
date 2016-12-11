@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#gallery {
+    width: 660px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#thumbs-gallery img {
+    width: 118px;
+    height: 64px;
+    cursor: pointer;
+    border: solid 4px transparent;
+}
+
+#thumbs-gallery img.border-active {
+    border: solid 4px #ff0000;
+}
+
+#current-photo-wrapper img {
+    width: 640px;
+    height: 380px;
+}
+
+a#next-button, a#previous-button {
+    font-size: 35px;
+    margin: 0 15px;
+    padding: 0 20px;
+    color: #000000;
+    text-decoration: none;
+    border: solid 2px #000000;
+}
