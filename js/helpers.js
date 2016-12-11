@@ -9,10 +9,6 @@ let Helpers = {
                 return images[i];
             }
         }
-    },
-    
-    isPhotoCurrent(galleryPhotoId, currentPhotoId) {
-        return Number(galleryPhotoId) === currentPhotoId;
     }
 };
 

@@ -96,11 +96,8 @@ class Gallery {
     }
     
     updatePhotoClassName($photo) {
-        if (Helpers.isPhotoCurrent($photo.dataset.id, this.currentPhotoId)) {
-            $photo.className = 'border-active';
-        } else {
-            $photo.className = '';
-        }
+        let isPhotoCurrent = (Number($photo.dataset.id) === this.currentPhotoId);        
+        $photo.className = isPhotoCurrent ? 'border-active' : '';
     }
 }
 
