@@ -28,7 +28,7 @@ npm run build
 npm run clear
 ```
 
-** Nasłuchiwanie na zmiany w kodzie oraz automatyczne budowanie pliku `main.bundle.dist`
+* Nasłuchiwanie na zmiany w kodzie oraz automatyczne budowanie pliku `main.bundle.dist`
 
 ```
 npm run watch
