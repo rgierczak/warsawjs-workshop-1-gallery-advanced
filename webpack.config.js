@@ -8,6 +8,8 @@ module.exports = {
         filename: 'main.bundle.js'
     },
     
+    devtool: 'inline-source-map',
+    
     module: {
         loaders: [
             {
@@ -29,15 +31,15 @@ module.exports = {
             }
         ]
     },
-    
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-            },
-            output: {
-                comments: false,
-            },
-        }),
-    ]    
+    //
+    // plugins: [
+    //     new webpack.optimize.UglifyJsPlugin({
+    //         compress: {
+    //             warnings: false,
+    //         },
+    //         output: {
+    //             comments: false,
+    //         },
+    //     }),
+    // ]
 };
